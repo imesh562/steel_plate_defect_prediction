@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Defect Prediction</title>
+</head>
+<body>
+    <h2>Enter the Plate Features</h2>
+    <form action="/predict" method="post">
+        {% for feature in [
+            'X_Minimum', 'X_Maximum', 'Y_Minimum', 'Y_Maximum', 'Pixels_Areas', 'X_Perimeter',
+            'Y_Perimeter', 'Sum_of_Luminosity', 'Minimum_of_Luminosity', 'Maximum_of_Luminosity',
+            'Length_of_Conveyer', 'TypeOfSteel_A300', 'TypeOfSteel_A400', 'Steel_Plate_Thickness',
+            'Edges_Index', 'Empty_Index', 'Square_Index', 'Outside_X_Index', 'Edges_X_Index',
+            'Edges_Y_Index', 'Outside_Global_Index', 'LogOfAreas', 'Log_X_Index', 'Log_Y_Index',
+            'Orientation_Index', 'Luminosity_Index', 'SigmoidOfAreas'
+        ] %}
+        <label for="{{ feature }}">{{ feature }}:</label>
+        <input type="number" id="{{ feature }}" name="{{ feature }}" step="any" required><br><br>
+        {% endfor %}
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h2>{{ prediction_text }}</h2>
+
+    <h3>Prediction Probabilities for Each Defect:</h3>
+    <table border="1">
+        <tr>
+            <th>Defect Type</th>
+            <th>Probability</th>
+        </tr>
+        {% for defect, prob in prediction_table.items() %}
+        <tr>
+            <td>{{ defect }}</td>
+            <td>{{ prob }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Make another prediction</a>
+</body>
+</html>
