@@ -2,12 +2,12 @@ from flask import Flask, request, render_template
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 import tensorflow as tf
+import joblib
 
 app = Flask(__name__)
 
 model = tf.keras.models.load_model('model.h5')
-
-scaler = StandardScaler()
+scaler = joblib.load('scaler.pkl')
 
 
 @app.route('/')
@@ -15,7 +15,6 @@ def home():
     return render_template('index.html')
 
 
-# Route to handle prediction
 @app.route('/predict', methods=['POST'])
 def predict():
     features = [float(request.form[col]) for col in [
@@ -29,7 +28,7 @@ def predict():
 
     input_data = np.array(features).reshape(1, -1)
 
-    input_data_scaled = scaler.fit_transform(input_data)
+    input_data_scaled = scaler.transform(input_data)
 
     prediction = model.predict(input_data_scaled)
 
